@@ -1,4 +1,5 @@
 fastapi==0.99.1
+uvicorn
 deep-translator
 python-multipart
 anyio
