@@ -7,7 +7,7 @@ app = FastAPI()
 async def root():
     return {"message":"welcome to translator api free"}
 
-@app.post("/transaltor")
+@app.post("/api/translate")
 def translate(text:str = Form(...)):
     translated = GoogleTranslator(source='en', target='km').translate(text)
     return {"translated":translated}
