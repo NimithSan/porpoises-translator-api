@@ -1,5 +1,4 @@
 fastapi==0.99.1
-mangum
 deep-translator
 python-multipart
 anyio

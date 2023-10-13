@@ -1,10 +1,7 @@
 from deep_translator import GoogleTranslator
 from fastapi import FastAPI,Form
-from mangum import Mangum
 
 app = FastAPI()
-
-handler = Mangum(app)
 
 @app.get("/")
 async def root():
