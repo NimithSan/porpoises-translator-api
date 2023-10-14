@@ -16,3 +16,5 @@ def translate(text:str = Form(...)):
 def translate(text:str = Form(...)):
     translated = GoogleTranslator(source='km', target='en').translate(text)
     return {"translated":translated}
+
+print("test brother")
