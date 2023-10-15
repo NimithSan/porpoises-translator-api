@@ -3,3 +3,4 @@ uvicorn
 deep-translator
 python-multipart
 anyio
+jinja2

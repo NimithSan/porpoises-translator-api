@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Translator</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">DemonLord Translator</h1>
+
+        <!-- Input Text -->
+        <div class="form-group">
+            <label for="inputText">Enter Text:</label>
+            <textarea id="inputText" class="form-control" rows="5" placeholder="Enter text in English or Khmer"></textarea>
+        </div>
+
+        <!-- Language Switch Toggle using Bootstrap -->
+        <div class="form-group form-check form-switch" style="margin-top: 10px;">
+            <input type="checkbox" class="form-check-input" id="langToggle">
+            <label class="form-check-label" for="langToggle">Switch Language</label>
+        </div>
+
+        <!-- Translate Buttons -->
+        <div class="form-group" style="padding-bottom: 10px;padding-top: 10px;">
+            <button id="translateToKhmer" class="btn btn-primary">Translate to Khmer</button>
+            <button id="translateToEnglish" class="btn btn-primary" disabled>Translate to English</button>
+        </div>
+
+        <!-- Output Text -->
+        <div class="form-group">
+            <label >Translated Text:</label>
+            <textarea id="outputText" class="form-control" rows="5" readonly></textarea>
+        </div>
+
+    </div>
+
+    <script>
+        const translateToKhmerBtn = document.getElementById("translateToKhmer");
+        const translateToEnglishBtn = document.getElementById("translateToEnglish");
+        const inputText = document.getElementById("inputText");
+        const outputText = document.getElementById("outputText");
+        const langToggle = document.getElementById("langToggle");
+
+        // function request to backend
+        function translateText(text, targetLang) {
+            fetch(`/api/${targetLang}`, {
+                method: "POST",
+                body: new URLSearchParams({ text }),
+            })
+                .then(response => response.json())
+                .then(data => {
+                    outputText.value = data.translated;
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+        }
+
+        translateToKhmerBtn.addEventListener("click", () => {
+            const textToTranslate = inputText.value;
+            translateText(textToTranslate, "en-kh");
+        });
+
+        translateToEnglishBtn.addEventListener("click", () => {
+            const textToTranslate = inputText.value;
+            translateText(textToTranslate, "kh-en");
+        });
+
+        // Event listener for language toggle switch
+        langToggle.addEventListener("change", () => {
+            if (langToggle.checked) {
+                // English to Khmer translation
+                translateToKhmerBtn.disabled = true;
+                translateToEnglishBtn.disabled = false;
+            } else {
+                // Khmer to English translation
+                translateToKhmerBtn.disabled = false;
+                translateToEnglishBtn.disabled = true;
+            }
+        });
+    </script>
+</body>
+</html>
