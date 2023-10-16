@@ -7,11 +7,10 @@ from deep_translator import GoogleTranslator
 
 app = FastAPI()
 
-# Define the directory where your static files are located
-# app.mount("/static", StaticFiles(directory="static"), name="static")
+app.mount("/static", StaticFiles(directory="static"), name="static")
 
 # Create an instance of Jinja2Templates for rendering HTML templates
-templates = Jinja2Templates(directory="templates")  # Create a "templates" directory for your HTML templates
+templates = Jinja2Templates(directory="templates") 
 
 @app.get("/")
 async def root(request: Request):
@@ -27,6 +26,3 @@ def translate(text:str = Form(...)):
 def translate(text:str = Form(...)):
     translated = GoogleTranslator(source='km', target='en').translate(text)
     return {"translated":translated}
-
-if __name__ == "__main__":
-    uvicorn.run(app, host="192.168.1.22", port=8000)
