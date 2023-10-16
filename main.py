@@ -1,7 +1,6 @@
 from fastapi import FastAPI, Form, Request
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
-import uvicorn
 from deep_translator import GoogleTranslator
 
 
@@ -26,3 +25,4 @@ def translate(text:str = Form(...)):
 def translate(text:str = Form(...)):
     translated = GoogleTranslator(source='km', target='en').translate(text)
     return {"translated":translated}
+

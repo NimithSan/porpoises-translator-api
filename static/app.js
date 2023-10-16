@@ -1,8 +1,9 @@
-const translateToKhmerBtn = document.getElementById("translateToKhmer");
-const translateToEnglishBtn = document.getElementById("translateToEnglish");
+// const translateToKhmerBtn = document.getElementById("translateToKhmer");
+// const translateToEnglishBtn = document.getElementById("translateToEnglish");
 const inputText = document.getElementById("inputText");
 const outputText = document.getElementById("outputText");
 const langToggle = document.getElementById("langToggle");
+const translateButton = document.getElementById("translateButton")
 
 // function request to backend
 function translateText(text, targetLang) {
@@ -19,25 +20,38 @@ function translateText(text, targetLang) {
         });
 }
 
-translateToKhmerBtn.addEventListener("click", () => {
-    const textToTranslate = inputText.value;
-    translateText(textToTranslate, "en-kh");
-});
+// translateToKhmerBtn.addEventListener("click", () => {
+//     const textToTranslate = inputText.value;
+//     translateText(textToTranslate, "en-kh");
+// });
 
-translateToEnglishBtn.addEventListener("click", () => {
-    const textToTranslate = inputText.value;
-    translateText(textToTranslate, "kh-en");
-});
+// translateToEnglishBtn.addEventListener("click", () => {
+//     const textToTranslate = inputText.value;
+//     translateText(textToTranslate, "kh-en");
+// });
 
 // Event listener for language toggle switch
-langToggle.addEventListener("change", () => {
-    if (langToggle.checked) {
-        // English to Khmer translation
-        translateToKhmerBtn.disabled = true;
-        translateToEnglishBtn.disabled = false;
-    } else {
-        // Khmer to English translation
-        translateToKhmerBtn.disabled = false;
-        translateToEnglishBtn.disabled = true;
-    }
+// langToggle.addEventListener("change", () => {
+//     if (langToggle.checked) {
+//         // English to Khmer translation
+//         translateToKhmerBtn.disabled = true;
+//         translateToEnglishBtn.disabled = false;
+//     } else {
+//         // Khmer to English translation
+//         translateToKhmerBtn.disabled = false;
+//         translateToEnglishBtn.disabled = true;
+//     }
+// });
+
+const fromLanguageSelect = document.getElementById("fromLanguageSelect");
+const toLanguageSelect = document.getElementById("toLanguageSelect");
+
+// Event listener for the "Translate" button
+translateButton.addEventListener("click", () => {
+    const textToTranslate = inputText.value;
+    const fromLanguage = fromLanguageSelect.value;
+    const toLanguage = toLanguageSelect.value;
+    
+    // Call the translation function with the selected languages
+    translateText(textToTranslate, `${fromLanguage}-${toLanguage}`);
 });

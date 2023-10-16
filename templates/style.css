@@ -1,0 +1,4 @@
+.select-container {
+    height: 100px; /* Adjust the height as needed */
+    overflow: auto;
+}
