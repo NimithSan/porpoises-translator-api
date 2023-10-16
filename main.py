@@ -7,6 +7,8 @@ from deep_translator import GoogleTranslator
 app = FastAPI()
 
 app.mount("/static", StaticFiles(directory="static"), name="static")
+app.mount("/src", StaticFiles(directory="src"), name="src")
+
 
 # Create an instance of Jinja2Templates for rendering HTML templates
 templates = Jinja2Templates(directory="templates") 
