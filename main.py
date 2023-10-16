@@ -17,14 +17,8 @@ templates = Jinja2Templates(directory="templates")
 async def root(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
 
-@app.post("/api/en-kh")
-def translate(text:str = Form(...)):
-    translated = GoogleTranslator(source='en', target='km').translate(text)
-    return {"translated":translated}
-
-#max translate khmer to eng is 1863 characters.
-@app.post("/api/kh-en")
-def translate(text:str = Form(...)):
-    translated = GoogleTranslator(source='km', target='en').translate(text)
-    return {"translated":translated}
-
+@app.post('/api/translate')
+def translate_text(text: str = Form(...), target_language: str = Form(...)):
+    translator = GoogleTranslator(source='auto', target=target_language)
+    translated_text = translator.translate(text)
+    return {"translated_text": translated_text}
