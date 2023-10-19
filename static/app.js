@@ -3,10 +3,10 @@ const outputText = document.getElementById("outputText");
 const langToggle = document.getElementById("langToggle");
 const translateButton = document.getElementById("translateButton")
 
-function translate(text,target_language) {
+function translateText(text,src_language,target_language) {
     fetch(`/api/translate`, {
         method: "POST",
-        body: new URLSearchParams({ text,target_language}),
+        body: new URLSearchParams({ text,src_language,target_language}),
     })
         .then(response => response.json())
         .then(data => {
@@ -19,11 +19,10 @@ function translate(text,target_language) {
 
 const fromLanguageSelect = document.getElementById("fromLanguageSelect");
 const toLanguageSelect = document.getElementById("toLanguageSelect");
-
 // Event listener for the "Translate" button
 translateButton.addEventListener("click", () => {
     const text = inputText.value;
     const target_language = toLanguageSelect.value;
-
-    translate(text,target_language)
+    const src_language = fromLanguageSelect.value
+    translateText(text,src_language,target_language)
 });
