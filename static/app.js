@@ -1,6 +1,5 @@
 const inputText = document.getElementById("inputText");
 const outputText = document.getElementById("outputText");
-const translateButton = document.getElementById("translateButton");
 
 let translationTimeout;
 
@@ -21,32 +20,47 @@ function translateText(text, src_language, target_language) {
 const fromLanguageSelect = document.getElementById("fromLanguageSelect");
 const toLanguageSelect = document.getElementById("toLanguageSelect");
 
-// Event listener for the "Translate" button
-translateButton.addEventListener("click", () => {
-    const text = inputText.value;
+// Event listener for input text changes and language selection changes
+function handleTranslation() {
+    const text = inputText.value.trim(); // Trim leading and trailing whitespaces
     const target_language = toLanguageSelect.value;
     const src_language = fromLanguageSelect.value;
-    translateText(text, src_language, target_language);
-});
 
-// Event listener for input text changes
-inputText.addEventListener("input", () => {
-    const text = inputText.value;
-    const target_language = toLanguageSelect.value;
-    const src_language = fromLanguageSelect.value;
+    // Set the output text to empty if the input text is empty
+    outputText.value = text === "" ? "" : outputText.value;
 
     // Clear previous timeout to avoid unnecessary requests
     clearTimeout(translationTimeout);
 
-    // Set a new timeout for 2 seconds
+    // Set a new timeout for 300 milliseconds (adjust as needed)
     translationTimeout = setTimeout(() => {
-        translateText(text, src_language, target_language);
-    }, 400);
-});
+        if(inputText.value != "") {
+            translateText(text, src_language, target_language);
+        }
+    }, 300);
+}
 
+// Event listeners for input text changes
+inputText.addEventListener("input", handleTranslation);
+
+// Event listeners for language selection changes
+fromLanguageSelect.addEventListener("change", handleTranslation);
+toLanguageSelect.addEventListener("change", handleTranslation);
+
+// Event listener for swap button
 const swapButton = document.getElementById("swapButton");
 swapButton.addEventListener("click", () => {
+    // Swap input and output text content
+    const tempText = inputText.value;
+    inputText.value = outputText.value;
+    outputText.value = tempText;
+
+    // Swap selected languages in language dropdowns
     const fromLanguage = fromLanguageSelect.value;
     fromLanguageSelect.value = toLanguageSelect.value;
     toLanguageSelect.value = fromLanguage;
+
+    // Trigger translation after swapping
+    handleTranslation();
 });
+
