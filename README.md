@@ -15,7 +15,7 @@ To use the Porpoises Translator, you need to provide the following parameters:
 ## Preview
 
 <div style="border: 2px solid #ddd; padding: 5px;">
-  <a href="https://porpoises-translator.vercel.app">
+  <a href="porpoise-translator.vercel.app">
     <img src="/src/front_end.png" alt="Front End Image" style="width:100%;">
   </a>
 </div>
@@ -23,7 +23,7 @@ To use the Porpoises Translator, you need to provide the following parameters:
 ## Swagger UI
 
 <div style="border: 1px solid #ddd; padding: 5px;">
-  <a href="https://porpoises-translator.vercel.app/docs">
+  <a href="porpoise-translator.vercel.app/docs">
     <img src="/src/swagger_ui.png" alt="Front End Image" style="width:100%;">
   </a>
 </div>
